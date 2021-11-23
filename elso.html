@@ -9,21 +9,39 @@
 </head>
 <body>
     <div id="components-demo">
+        <todo-list :todos="todos"></todo-list>
+    </div>
+
+    <!--<div id="components-demo">
         <button-counter szoveg="Ez a szöveg"></button-counter>
         <button-counter szoveg="Ez is egy szöveg"></button-counter>
         <button-counter szoveg="Igen"></button-counter>
-    </div>
+    </div>-->
 
       <script>
-        Vue.component('button-counter', {
-            props: ['szoveg'],
-            data: function () {
-                return {
-                count: 9999999999999
-                }
-            },
-            template: `<button v-on:click="count++"> {{ szoveg }} {{ count }}.</button>`,
-        })
+          Vue.component('todo-list', {
+              props: ['todos'],
+              template:
+                `<ul>
+                    <li v-for="todo in todos"> {{ todo }} </li>
+                </ul>`,
+          })
+          let app = new Vue({
+              el: '#components-demo',
+              data: {
+                todos: ['todo1', 'todo2', 'todo3']
+              }
+          })
+
+        //Vue.component('button-counter', {
+        //    props: ['szoveg'],
+        //    data: function () {
+        //        return {
+        //        count: 9999999999999
+        //        }
+        //    },
+        //    template: `<button v-on:click="count++"> {{ szoveg }} {{ count }}.</button>`,
+        //})
 
         new Vue({ el: '#components-demo' });
       </script>
