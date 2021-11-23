@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld v-for="todo in todos" :msg="todo" :key="todo.title"/>
+    <HelloWorld v-for="todo in todos" :msg="todo" :key="todo.title" v-on:delete-item="deleteTodo"/>
   </div>
 </template>
 
@@ -29,6 +29,13 @@ export default {
         done: false
       }
     ]
+    }
+  },
+  method: {
+    deleteTodo(todo) {
+      this.todos = this.todos.filter(function(item) {
+        return todo.title != item.title
+      })
     }
   }
 }
