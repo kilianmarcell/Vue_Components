@@ -9,19 +9,20 @@
 </head>
 <body>
     <div id="components-demo">
-        <button-counter></button-counter>
-        <button-counter></button-counter>
-        <button-counter></button-counter>
+        <button-counter szoveg="Ez a szöveg"></button-counter>
+        <button-counter szoveg="Ez is egy szöveg"></button-counter>
+        <button-counter szoveg="Igen"></button-counter>
     </div>
 
       <script>
         Vue.component('button-counter', {
+            props: ['szoveg'],
             data: function () {
                 return {
                 count: 9999999999999
                 }
             },
-            template: `<button v-on:click="count++">You clicked me {{ count }} times.</button>`,
+            template: `<button v-on:click="count++"> {{ szoveg }} {{ count }}.</button>`,
         })
 
         new Vue({ el: '#components-demo' });
