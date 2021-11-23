@@ -9,29 +9,61 @@
 </head>
 <body>
     <div id="components-demo">
-        <todo-list :todos="todos"></todo-list>
+        <item v-for="(todo, index) in todos" :teendo="todo" v-on:delete-item="deleteItem(index)"></item>
     </div>
 
     <!--<div id="components-demo">
+        <cim szoveg="Ez a cím!" alcim="Ez az alcím!"></cim>
+    </div>
+
+    <div id="components-demo">
+        <todo-list :todos="todos"></todo-list>
+    </div>
+
+    <div id="components-demo">
         <button-counter szoveg="Ez a szöveg"></button-counter>
         <button-counter szoveg="Ez is egy szöveg"></button-counter>
         <button-counter szoveg="Igen"></button-counter>
     </div>-->
 
       <script>
-          Vue.component('todo-list', {
-              props: ['todos'],
+          Vue.component('item', {
+              props: ['teendo'],
               template:
-                `<ul>
-                    <li v-for="todo in todos"> {{ todo }} </li>
-                </ul>`,
+                `<div>
+                    <input type="checkbox" v-model="teendo.done"/>
+                    {{ teendo.title }}
+                    <span v-on:click="$emit('delete-item')">X</span>
+                </div>`,
           })
-          let app = new Vue({
-              el: '#components-demo',
-              data: {
-                todos: ['todo1', 'todo2', 'todo3']
-              }
-          })
+
+          //Vue.component('cim', {
+          //    props: ['szoveg', 'alcim'],
+          //    template:
+          //      `<div>
+          //          <h1> {{ szoveg }} </h1>
+          //          <h2> {{ alcim }} </h2>
+          //      </div>`,
+          //})
+
+          //Vue.component('todo-list-item', {
+          //    props: ['todo'],
+          //    template:
+          //      `<li> {{ todo }} </li>`,
+          //})
+          //Vue.component('todo-list', {
+          //    props: ['todos'],
+          //    template:
+          //      `<ul>
+          //          <todo-list-item v-for="todo in todos" :todo="todo"></todo-list-item>
+          //      </ul>`,
+          //})
+          //let app = new Vue({
+          //    el: '#components-demo',
+          //    data: {
+          //      todos: ['todo1', 'todo2', 'todo3']
+          //    }
+          //})
 
         //Vue.component('button-counter', {
         //    props: ['szoveg'],
@@ -43,7 +75,29 @@
         //    template: `<button v-on:click="count++"> {{ szoveg }} {{ count }}.</button>`,
         //})
 
-        new Vue({ el: '#components-demo' });
+        let app = new Vue({
+            el: '#components-demo',
+            data: {
+                todos: [
+                {
+                    title: 'Todo 1',
+                    done: false
+                },
+                {
+                    title: 'Todo 2',
+                    done: false
+                },
+                {
+                    title: 'Todo 3',
+                    done: false
+                },
+            ]},
+            methods: {
+                deleteItem(index) {
+                    this.todos.splice(index, 1)
+                }
+            }
+        });
       </script>
 </body>
 </html>
