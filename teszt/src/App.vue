@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld v-for="todo in todos" :msg="todo" :key="todo.title"/>
   </div>
 </template>
 
@@ -12,6 +11,25 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+      
+    todos: [
+      {
+        title: 'Todo 1',
+        done: false
+      },
+      {
+        title: 'Todo 2',
+        done: false
+      },
+      {
+        title: 'Todo 3',
+        done: false
+      }
+    ]
+    }
   }
 }
 </script>
